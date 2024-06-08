@@ -5,6 +5,8 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import firstImage from './Images/first.jpg';
 import secondImage from './Images/kadir.jpg';
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from 'jwt-decode';
 
 const App = () => {
   const [profiles, setProfiles] = useState([]);
@@ -31,20 +33,33 @@ const App = () => {
     setProfiles(fetchedProfiles);
   }, []);
 
-  return (
-    <div>
-      <Navbar />
-      <Container>
-        <Grid container spacing={3}>
-          {profiles.map((profile, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              <ProfileCard profile={profile} />
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
-    </div>
-  );
+  //this is dating component
+  // return (
+  //   <div>
+  //     <Navbar />
+  //     <Container>
+  //       <Grid container spacing={3}>
+  //         {profiles.map((profile, index) => (
+  //           <Grid item xs={12} sm={6} md={4} key={index}>
+  //             <ProfileCard profile={profile} />
+  //           </Grid>
+  //         ))}
+  //       </Grid>
+  //     </Container>
+  //   </div>
+  // );
+
+  return <GoogleLogin
+  onSuccess={credentialResponse =>{
+    const credentialDecodeResponse = jwtDecode(credentialResponse.credential)
+    console.log('credentialDecodeResponse...??',credentialDecodeResponse);
+  }}
+  onError={()=>{
+    console.log('Login has Failed...??');
+  }}
+  >
+
+  </GoogleLogin>
 };
 
 export default App;
