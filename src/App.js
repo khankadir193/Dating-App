@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './Components/Navbar.js';
-import ProfileCard from './Components/ProfileCard.js';
+import ProfileCard from './Components/ProfileCard';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
+import firstImage from './Images/first.jpg';
+import secondImage from './Images/kadir.jpg';
 
 const App = () => {
   const [profiles, setProfiles] = useState([]);
@@ -13,12 +15,17 @@ const App = () => {
       {
         name: 'John Doe',
         bio: 'Software Developer',
-        image: 'https://via.placeholder.com/140'
+        image: firstImage
       },
       {
         name: 'Jane Smith',
         bio: 'Graphic Designer',
-        image: 'https://via.placeholder.com/140'
+        image: secondImage
+      },
+      {
+        name: 'Abdul Kadir Khan',
+        bio: 'Software Engineer',
+        image: secondImage
       }
     ];
     setProfiles(fetchedProfiles);
