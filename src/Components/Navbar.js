@@ -57,6 +57,7 @@ const Navbar = ({user, onLogout}) => {
           >
             <MenuItem onClick={handleClose}>Profile</MenuItem>
             <MenuItem onClick={handleClose}>My account</MenuItem>
+            <MenuItem onClick={onLogout}>Logout</MenuItem>
           </Menu>
         </div>
       </Toolbar>
