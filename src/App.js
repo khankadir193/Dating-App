@@ -1,15 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState,useEffect } from 'react';
+import GoogleLoginButton from './Components/GoogleLoginButton.js';
 import Navbar from './Components/Navbar.js';
-import ProfileCard from './Components/ProfileCard';
+import ProfileCard from './Components/ProfileCard.js';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-import firstImage from './Images/first.jpg';
-import secondImage from './Images/kadir.jpg';
-import { GoogleLogin } from '@react-oauth/google';
-import { jwtDecode } from 'jwt-decode';
+
 
 const App = () => {
   const [profiles, setProfiles] = useState([]);
+  const [user, setUser] = useState(null);
+
+  const handleLoginSuccess = (response) => {
+    console.log('Login Success: currentUser:', response.profileObj);
+    setUser(response.profileObj);
+  };
+
+  const handleLoginFailure = (response) => {
+    console.log('Login Failed: res:', response);
+  };
 
   useEffect(() => {
     // Fetch profiles from an API or database
@@ -17,49 +25,39 @@ const App = () => {
       {
         name: 'John Doe',
         bio: 'Software Developer',
-        image: firstImage
+        image: 'https://via.placeholder.com/140'
       },
       {
         name: 'Jane Smith',
         bio: 'Graphic Designer',
-        image: secondImage
-      },
-      {
-        name: 'Abdul Kadir Khan',
-        bio: 'Software Engineer',
-        image: secondImage
+        image: 'https://via.placeholder.com/140'
       }
     ];
     setProfiles(fetchedProfiles);
   }, []);
 
-  //this is dating component
-  // return (
-  //   <div>
-  //     <Navbar />
-  //     <Container>
-  //       <Grid container spacing={3}>
-  //         {profiles.map((profile, index) => (
-  //           <Grid item xs={12} sm={6} md={4} key={index}>
-  //             <ProfileCard profile={profile} />
-  //           </Grid>
-  //         ))}
-  //       </Grid>
-  //     </Container>
-  //   </div>
-  // );
-
-  return <GoogleLogin
-  onSuccess={credentialResponse =>{
-    const credentialDecodeResponse = jwtDecode(credentialResponse.credential)
-    console.log('credentialDecodeResponse...??',credentialDecodeResponse);
-  }}
-  onError={()=>{
-    console.log('Login has Failed...??');
-  }}
-  >
-
-  </GoogleLogin>
+  return (
+    <div>
+      <Navbar />
+      <Container>
+        <Grid container spacing={3}>
+          {user ? (
+            <div>
+              <h2>Welcome, {user.name}</h2>
+              <img src={user.imageUrl} alt="profile" />
+            </div>
+          ) : (
+            <GoogleLoginButton onSuccess={handleLoginSuccess} onFailure={handleLoginFailure} />
+          )}
+          {profiles.map((profile, index) => (
+            <Grid item xs={12} sm={6} md={4} key={index}>
+              <ProfileCard profile={profile} />
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+    </div>
+  );
 };
 
 export default App;
