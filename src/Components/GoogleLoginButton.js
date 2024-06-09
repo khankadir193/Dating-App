@@ -1,19 +1,26 @@
+// src/components/GoogleLoginButton.js
+
 import React from 'react';
-import { GoogleLogin } from '@react-oauth/google';
+import { useGoogleLogin } from '@react-oauth/google';
+import Button from '@mui/material/Button'; // Importing Material-UI Button for styling
 
 const GoogleLoginButton = ({ onSuccess, onFailure }) => {
-  const clientId = 'YOUR_GOOGLE_CLIENT_ID'; // Replace with your Google Client ID
+  const login = useGoogleLogin({
+    onSuccess: (codeResponse) => {
+      console.log(codeResponse);
+      onSuccess(codeResponse);
+    },
+    onFailure: (error) => {
+      console.error('Login failed:', error);
+      onFailure(error);
+    },
+    flow: 'auth-code',
+  });
 
   return (
-    <div>
-      <GoogleLogin
-        clientId={clientId}
-        buttonText="Login with Google"
-        onSuccess={onSuccess}
-        onFailure={onFailure}
-        cookiePolicy={'single_host_origin'}
-      />
-    </div>
+    <Button variant="contained" color="primary" onClick={() => login()}>
+      Sign in with Google 🚀
+    </Button>
   );
 };
 
