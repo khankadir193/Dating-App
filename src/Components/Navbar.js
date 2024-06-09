@@ -6,9 +6,11 @@ import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import ProfileImage from './ProfileImage';
 
-const Navbar = () => {
+const Navbar = ({user, onLogout}) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const {name,email,picture} = user;
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -22,7 +24,7 @@ const Navbar = () => {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Dating App
+          {name.toUpperCase()}
         </Typography>
         <div>
           <IconButton
@@ -33,7 +35,10 @@ const Navbar = () => {
             onClick={handleMenu}
             color="inherit"
           >
-            <AccountCircle />
+            {/* <AccountCircle>
+            <img src={picture} alt='profile image' />
+            </AccountCircle> */}
+            <ProfileImage picture={picture} />
           </IconButton>
           <Menu
             id="menu-appbar"

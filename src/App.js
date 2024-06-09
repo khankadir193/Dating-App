@@ -11,8 +11,8 @@ const App = () => {
   const [user, setUser] = useState(null);
 
   const handleLoginSuccess = (decodedToken) => {
-    console.log('Login Success:', decodedToken);
-    setUser(decodedToken);
+    console.log('Login Success:', decodedToken.data);
+    setUser(decodedToken.data);
   };
 
   const handleLoginFailure = (errorResponse) => {
@@ -42,7 +42,7 @@ const App = () => {
 
   return (
     <div>
-      <Navbar user={user} onLogout={handleLogout} />
+      {user ? <Navbar user={user} onLogout={handleLogout} /> : null }
       <Container>
         <Grid container spacing={3}>
           {user ? (

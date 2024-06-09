@@ -7,9 +7,6 @@ import axios from 'axios';
 const GoogleLoginButton = ({ onSuccess, onFailure }) => {
   const login = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
-      console.log('tokenResponse:', tokenResponse);
-      onSuccess(tokenResponse);
-
       try {
         const { access_token } = tokenResponse;
         const userInfo = await axios.get(
@@ -21,6 +18,7 @@ const GoogleLoginButton = ({ onSuccess, onFailure }) => {
           }
         );
         console.log('userInfo:', userInfo);
+        onSuccess(userInfo);
         // Optionally handle user info here
       } catch (error) {
         console.error('Failed to fetch user info', error);
