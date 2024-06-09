@@ -1,20 +1,20 @@
 // src/components/GoogleLoginButton.js
-
 import React from 'react';
 import { useGoogleLogin } from '@react-oauth/google';
-import Button from '@mui/material/Button'; // Importing Material-UI Button for styling
+import { jwtDecode } from 'jwt-decode';
+import Button from '@mui/material/Button';
 
 const GoogleLoginButton = ({ onSuccess, onFailure }) => {
   const login = useGoogleLogin({
-    onSuccess: (codeResponse) => {
-      console.log(codeResponse);
-      onSuccess(codeResponse);
+    onSuccess: tokenResponse => {
+      const decodedToken = jwtDecode(tokenResponse.credential);
+      console.log('Decoded Token:', decodedToken);
+      onSuccess(decodedToken);
     },
-    onFailure: (error) => {
-      console.error('Login failed:', error);
-      onFailure(error);
-    },
-    flow: 'auth-code',
+    onError: errorResponse => {
+      console.error('Login Failed:', errorResponse);
+      onFailure(errorResponse);
+    }
   });
 
   return (

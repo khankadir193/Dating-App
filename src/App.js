@@ -1,29 +1,22 @@
 // src/App.js
-
 import React, { useState,useEffect } from 'react';
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import GoogleLoginButton from './Components/GoogleLoginButton';
+import GoogleLoginButton from './Components/GoogleLoginButton.js';
 import Navbar from './Components/Navbar.js';
-import ProfileCard from './Components/ProfileCard';
+import ProfileCard from './Components/ProfileCard.js';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 
 const App = () => {
-  const [user, setUser] = useState(null);
   const [profiles, setProfiles] = useState([]);
+  const [user, setUser] = useState(null);
 
-  const handleLoginSuccess = (response) => {
-    console.log('Login Success:', response);
-    // Fetch user details using the response code if necessary
-    setUser(response);
+  const handleLoginSuccess = (decodedToken) => {
+    console.log('Login Success:', decodedToken);
+    setUser(decodedToken);
   };
 
-  const handleLoginFailure = (error) => {
-    console.error('Login Failed:', error);
-  };
-
-  const handleLogout = () => {
-    setUser(null);
+  const handleLoginFailure = (errorResponse) => {
+    console.error('Login Failed:', errorResponse);
   };
 
   useEffect(() => {
@@ -32,26 +25,30 @@ const App = () => {
       {
         name: 'John Doe',
         bio: 'Software Developer',
-        image: 'https://via.placeholder.com/140',
+        image: 'https://via.placeholder.com/140'
       },
       {
         name: 'Jane Smith',
         bio: 'Graphic Designer',
-        image: 'https://via.placeholder.com/140',
-      },
+        image: 'https://via.placeholder.com/140'
+      }
     ];
     setProfiles(fetchedProfiles);
   }, []);
 
+  const handleLogout = () => {
+    setUser(null);
+  };
+
   return (
-    <GoogleOAuthProvider clientId="406249226819-c4ecih3kkeguitipdk6jeor53ma6qmsj.apps.googleusercontent.com">
+    <div>
       <Navbar user={user} onLogout={handleLogout} />
       <Container>
         <Grid container spacing={3}>
           {user ? (
             <div>
-              <h2>Welcome, {user.profileObj?.name}</h2>
-              <img src={user.profileObj?.imageUrl} alt="profile" />
+              <h2>Welcome, {user.name}</h2>
+              <img src={user.picture} alt="profile" />
             </div>
           ) : (
             <GoogleLoginButton onSuccess={handleLoginSuccess} onFailure={handleLoginFailure} />
@@ -63,7 +60,7 @@ const App = () => {
           ))}
         </Grid>
       </Container>
-    </GoogleOAuthProvider>
+    </div>
   );
 };
 
