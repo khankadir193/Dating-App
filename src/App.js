@@ -1,5 +1,5 @@
 // src/App.js
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import GoogleLoginButton from './Components/GoogleLoginButton.js';
 import Navbar from './Components/Navbar.js';
 import ProfileCard from './Components/ProfileCard.js';
@@ -45,22 +45,20 @@ const App = () => {
 
   return (
     <div>
-      {user ? <Navbar user={user} onLogout={handleLogout} /> : null }
+      {user && <Navbar user={user} onLogout={handleLogout} />}
       <Container>
         <Grid container spacing={3}>
           {user ? (
-            <div>
-              <h2>Welcome, {user.name}</h2>
-              <img src={user.picture} alt="profile" />
-            </div>
+            profiles.map((profile, index) => (
+              <Grid item xs={12} sm={6} md={4} key={index}>
+                <ProfileCard profile={profile} />
+              </Grid>
+            ))
           ) : (
-            <GoogleLoginButton onSuccess={handleLoginSuccess} onFailure={handleLoginFailure} />
-          )}
-          { user && profiles.map((profile, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              <ProfileCard profile={profile} />
+            <Grid item xs={12}>
+              <GoogleLoginButton onSuccess={handleLoginSuccess} onFailure={handleLoginFailure} />
             </Grid>
-          ))}
+          )}
         </Grid>
 
         <SwipeableComp />
