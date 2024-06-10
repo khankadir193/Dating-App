@@ -4,8 +4,8 @@ import Avatar from '@mui/material/Avatar';
 import { styled } from '@mui/system';
 
 const StyledAvatar = styled(Avatar)(({ theme }) => ({
-  width: theme.spacing(7),
-  height: theme.spacing(7),
+  width: theme.spacing(5),
+  height: theme.spacing(5),
 }));
 
 const ProfileImage = ({ picture }) => {
