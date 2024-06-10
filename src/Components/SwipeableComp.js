@@ -32,7 +32,7 @@ const SwipeableComp = () => {
   };
 
   return (
-    <SwipeableViews onChangeIndex={handleChangeIndex}>
+    <SwipeableViews onChangeIndex={handleChangeIndex} resistance animateHeight axis='y'>
       <div className={`${classes.slide} ${classes.slide1}`}>Slide 1</div>
       <div className={`${classes.slide} ${classes.slide2}`}>Slide 2</div>
       <div className={`${classes.slide} ${classes.slide3}`}>Slide 3</div>

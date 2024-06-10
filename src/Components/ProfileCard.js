@@ -24,8 +24,8 @@ const ProfileCard = ({ profile }) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Like</Button>
-        <Button size="small">Dislike</Button>
+        <Button size="small">SKIP</Button>
+        <Button size="small">LIKE</Button>
       </CardActions>
     </Card>
   );
