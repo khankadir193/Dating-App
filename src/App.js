@@ -8,6 +8,7 @@ import Grid from '@mui/material/Grid';
 import firstImage from './Images/first.jpg';
 import secondImage from './Images/kadir.jpg';
 import SwipeableComp from './Components/SwipeableComp.js';
+import SwipeableViews from 'react-swipeable-views';
 
 const App = () => {
   const [profiles, setProfiles] = useState([]);
@@ -49,11 +50,14 @@ const App = () => {
       <Container>
         <Grid container spacing={3}>
           {user ? (
-            profiles.map((profile, index) => (
-              <Grid item xs={12} sm={6} md={4} key={index}>
-                <ProfileCard profile={profile} />
-              </Grid>
-            ))
+            <SwipeableViews>
+              {profiles.map((profile, index) => (
+                <Grid item xs={12} sm={6} md={4} key={index}>
+                  <ProfileCard profile={profile} />
+                </Grid>
+              ))}
+            </SwipeableViews>
+
           ) : (
             <Grid item xs={12}>
               <GoogleLoginButton onSuccess={handleLoginSuccess} onFailure={handleLoginFailure} />
