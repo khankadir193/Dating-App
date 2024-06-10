@@ -7,6 +7,7 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import firstImage from './Images/first.jpg';
 import secondImage from './Images/kadir.jpg';
+import SwipeableComp from './Components/SwipeableComp.js';
 
 const App = () => {
   const [profiles, setProfiles] = useState([]);
@@ -61,6 +62,8 @@ const App = () => {
             </Grid>
           ))}
         </Grid>
+
+        <SwipeableComp />
       </Container>
     </div>
   );
