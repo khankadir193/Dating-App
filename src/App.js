@@ -7,9 +7,16 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import firstImage from './Images/first.jpg';
 import secondImage from './Images/kadir.jpg';
+import thirdImage from './Images/second.jpg';
 import SwipeableComp from './Components/SwipeableComp.js';
 import SwipeableViews from 'react-swipeable-views';
+import styled from '@emotion/styled/macro';
+// import 
 
+const StyledGrid = styled(Grid)(({ theme }) => ({
+  backgroundColor: 'lightblue',
+  padding: '20px',
+}));
 const App = () => {
   const [profiles, setProfiles] = useState([]);
   const [user, setUser] = useState(null);
@@ -35,6 +42,11 @@ const App = () => {
         name: 'Jane Smith',
         bio: 'Graphic Designer',
         image: secondImage
+      },
+      {
+        name: 'Abdul Jabir Khan',
+        bio: 'Architect',
+        image: thirdImage
       }
     ];
     setProfiles(fetchedProfiles);
@@ -50,7 +62,7 @@ const App = () => {
       <Container>
         <Grid container spacing={3}>
           {user ? (
-            <SwipeableViews>
+            <SwipeableViews axis='y' animateHeight resistance>
               {profiles.map((profile, index) => (
                 <Grid item xs={12} sm={6} md={4} key={index}>
                   <ProfileCard profile={profile} />
@@ -65,7 +77,7 @@ const App = () => {
           )}
         </Grid>
 
-        <SwipeableComp />
+        {/* <SwipeableComp /> */}
       </Container>
     </div>
   );
