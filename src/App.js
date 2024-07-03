@@ -20,6 +20,7 @@ const StyledGrid = styled(Grid)(({ theme }) => ({
 const App = () => {
   const [profiles, setProfiles] = useState([]);
   const [user, setUser] = useState(null);
+  const [currentIndex,setCurrentIndex] = useState(0);
 
   const handleLoginSuccess = (decodedToken) => {
     console.log('Login Success:', decodedToken.data);
@@ -56,16 +57,21 @@ const App = () => {
     setUser(null);
   };
 
+  const handleAction = ()=>{
+    setCurrentIndex((prevIndx)=> (prevIndx+1) % profiles.length)
+  }
+
   return (
     <div>
       {user && <Navbar user={user} onLogout={handleLogout} />}
       <Container>
         <Grid container spacing={3}>
           {user ? (
-            <SwipeableViews axis='y' animateHeight style={{marginTop:'30px',width:'100%'}}>
+            <SwipeableViews axis='y' animateHeight style={{marginTop:'30px',width:'100%'}}
+            index={currentIndex} onChangeIndex={setCurrentIndex}>
               {profiles.map((profile, index) => (
                 <Grid item xs={12} sm={6} md={4} key={index}>
-                  <ProfileCard profile={profile} />
+                  <ProfileCard profile={profile} onAction={handleAction} />
                 </Grid>
               ))}
             </SwipeableViews>

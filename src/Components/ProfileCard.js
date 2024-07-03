@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 
-const ProfileCard = ({ profile }) => {
+const ProfileCard = ({ profile,onAction }) => {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -24,8 +24,8 @@ const ProfileCard = ({ profile }) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">SKIP</Button>
-        <Button size="small">LIKE</Button>
+        <Button size="small" onClick={onAction}>SKIP</Button>
+        <Button size="small" onClick={onAction}>LIKE</Button>
       </CardActions>
     </Card>
   );
