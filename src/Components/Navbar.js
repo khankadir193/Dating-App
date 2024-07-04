@@ -8,11 +8,13 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ProfileImage from './ProfileImage';
 import Account from './Account';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = ({user, onLogout}) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const {name,email,picture} = user;
   const [account,setAccount] = useState();
+  const navigate = useNavigate();
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -25,6 +27,7 @@ const Navbar = ({user, onLogout}) => {
   const hanldeProfile = ()=>{
     setAccount(true);
     setAnchorEl(null);
+    navigate('/profile');
   }
 
   return (
@@ -70,7 +73,7 @@ const Navbar = ({user, onLogout}) => {
         </div>
       </Toolbar>
     </AppBar>
-    {account && <Account />}
+    {/* {account && <Account />} */}
     </>
   );
 };

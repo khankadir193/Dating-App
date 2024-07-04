@@ -10,6 +10,7 @@ import secondImage from './Images/kadir.jpg';
 import thirdImage from './Images/second.jpg';
 import SwipeableViews from 'react-swipeable-views';
 import styled from '@emotion/styled/macro';
+import Account from './Components/Account.js';
 
 const StyledGrid = styled(Grid)(({ theme }) => ({
   backgroundColor: 'lightblue',
@@ -79,7 +80,7 @@ const App = () => {
                   )
                 }
               />
-              <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/profile" element={<Account />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="*" element={<NotFound />} />
