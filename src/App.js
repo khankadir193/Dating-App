@@ -11,6 +11,7 @@ import thirdImage from './Images/second.jpg';
 import SwipeableComp from './Components/SwipeableComp.js';
 import SwipeableViews from 'react-swipeable-views';
 import styled from '@emotion/styled/macro';
+import { BrowserRouter } from 'react-router-dom';
 // import 
 
 const StyledGrid = styled(Grid)(({ theme }) => ({
