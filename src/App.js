@@ -36,8 +36,8 @@ const App = () => {
   useEffect(() => {
     // Fetch profiles from an API or database
     const fetchedProfiles = [
-      { name: 'John Doe', bio: 'Software Developer', image: firstImage },
-      { name: 'Jane Smith', bio: 'Graphic Designer', image: secondImage },
+      { name: 'Abdullah Khan', bio: 'Software Developer', image: firstImage },
+      { name: 'Iqra Khan', bio: 'Graphic Designer', image: secondImage },
       { name: 'Abdul Jabir Khan', bio: 'Architect', image: thirdImage },
     ];
     setProfiles(fetchedProfiles);
