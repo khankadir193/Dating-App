@@ -1,37 +1,29 @@
-import React, { useEffect } from 'react';
+// backendIntegration.js
 
-const BackendIntegration = ({ userData }) => {
-  useEffect(() => {
-    const postData = async () => {
-      try {
-        const response = await fetch('http://localhost:3001/insert', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(userData)
-        });
+const backendIntegration = async (userData) => {
+  const url = 'http://localhost:3001/insert';
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(userData)
+  };
 
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
+  try {
+    const response = await fetch(url, options);
 
-        const data = await response.json();
-        console.log('Response data:', data);
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
+    if (!response.ok) {
+      throw new Error(`Network response was not ok: ${response.statusText}`);
+    }
 
-    postData();
-  }, [userData]);
-
-  return (
-    <div>
-      <h2>Backend Integration</h2>
-      <p>Check the console for the response data.</p>
-    </div>
-  );
+    const data = await response.json();
+    console.log('Response data:', data);
+    return data;  // Return the data for further use if needed
+  } catch (error) {
+    console.error('Error during fetch operation:', error);
+    throw error;  // Re-throw the error to allow handling in the calling code
+  }
 };
 
-export default BackendIntegration;
+export default backendIntegration;
