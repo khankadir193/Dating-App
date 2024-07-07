@@ -11,6 +11,7 @@ import thirdImage from './Images/second.jpg';
 import SwipeableViews from 'react-swipeable-views';
 import styled from '@emotion/styled/macro';
 import Account from './Components/Account.js';
+import BackendIntegration from './Components/BackendIntegration.js';
 
 const StyledGrid = styled(Grid)(({ theme }) => ({
   backgroundColor: 'lightblue',
@@ -53,6 +54,7 @@ const App = () => {
     <Router>
       <div>
         {user && <Navbar user={user} onLogout={handleLogout} />}
+        {user && <BackendIntegration userData={user} />}
         <Container>
           <Grid container spacing={3}>
             <Routes>
