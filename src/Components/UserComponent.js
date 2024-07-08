@@ -33,8 +33,12 @@ const UserComponent = ({ userData }) => {
 
   useEffect(() => {
     const performDataOperations = async () => {
-      // await storeData();
       const res = await fetchData();
+      res.length > 0 ? await res?.map(async (item)=>{
+        if(item.email !== userData.email){
+          await storeData();
+        }
+      }) : await storeData();
       console.log('fetchData function', res);
     };
 
