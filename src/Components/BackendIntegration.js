@@ -25,24 +25,24 @@ const backendIntegration = {
     }
   },
 
-  // getData: async () => {
-  //   const url = 'http://localhost:3001/gettingData';
+  getData: async () => {
+    const url = 'http://localhost:3001/documents';
 
-  //   try {
-  //     const response = await fetch(url);
+    try {
+      const response = await fetch(url);
 
-  //     if (!response.ok) {
-  //       throw new Error(`Network response was not ok: ${response.statusText}`);
-  //     }
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.statusText}`);
+      }
 
-  //     const data = await response.json();
-  //     console.log('getting Response data:', data);
-  //     return data;  // Return the data for further use if needed
-  //   } catch (error) {
-  //     console.error('Error during fetch operation:', error);
-  //     throw error;  // Re-throw the error to allow handling in the calling code
-  //   }
-  // }
+      const data = await response.json();
+      console.log('getting Response data:', data);
+      return data;  // Return the data for further use if needed
+    } catch (error) {
+      console.error('Error during fetch operation:', error);
+      throw error;  // Re-throw the error to allow handling in the calling code
+    }
+  }
 };
 
 export default backendIntegration;

@@ -9,24 +9,24 @@ const UserComponent = ({ userData }) => {
   useEffect(() => {
     const fetchData = async () => {
       //inserting data
-      try {
-        const result = await backendIntegration.postData(userData);
-        setData(result); // Set the received data to state
-      } catch (err) {
-        setError(err.message); // Set error message to state
-      } finally {
-        setLoading(false); // Set loading state to false
-      }
-
-      //getting data
       // try {
-      //   const result = await backendIntegration.getData();
+      //   const result = await backendIntegration.postData(userData);
       //   setData(result); // Set the received data to state
       // } catch (err) {
       //   setError(err.message); // Set error message to state
       // } finally {
       //   setLoading(false); // Set loading state to false
       // }
+
+      // getting data
+      try {
+        const result = await backendIntegration.getData();
+        setData(result); // Set the received data to state
+      } catch (err) {
+        setError(err.message); // Set error message to state
+      } finally {
+        setLoading(false); // Set loading state to false
+      }
     };
 
     fetchData();
