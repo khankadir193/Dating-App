@@ -31,15 +31,29 @@ const UserComponent = ({ userData }) => {
     }
   };
 
-  useEffect(() => {
+   useEffect(() => {
     const performDataOperations = async () => {
-      const res = await fetchData();
-      res.length > 0 ? await res?.map(async (item)=>{
-        if(item.email !== userData.email){
+      setLoading(true); // Ensure loading state is set before starting async operations
+
+      try {
+        const res = await fetchData();
+        
+        if (res.length > 0) {
+          const emailExists = res.some(item => item.email === userData.email);
+          
+          if (!emailExists) {
+            await storeData();
+          }
+        } else {
           await storeData();
         }
-      }) : await storeData();
-      console.log('fetchData function', res);
+
+        console.log('fetchData function', res);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
     };
 
     performDataOperations();
