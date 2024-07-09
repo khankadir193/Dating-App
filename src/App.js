@@ -35,12 +35,12 @@ const App = () => {
 
   useEffect(() => {
     // Fetch profiles from an API or database
-    const fetchedProfiles = [
-      { name: 'Abdullah Khan', bio: 'Software Developer', image: firstImage },
-      { name: 'Iqra Khan', bio: 'Graphic Designer', image: secondImage },
-      { name: 'Abdul Jabir Khan', bio: 'Architect', image: thirdImage },
-    ];
-    setProfiles(fetchedProfiles);
+    // const fetchedProfiles = [
+    //   { name: 'Abdullah Khan', bio: 'Software Developer', image: firstImage },
+    //   { name: 'Iqra Khan', bio: 'Graphic Designer', image: secondImage },
+    //   { name: 'Abdul Jabir Khan', bio: 'Architect', image: thirdImage },
+    // ];
+    // setProfiles(fetchedProfiles);
   }, []);
 
   const handleLogout = () => {
@@ -55,7 +55,7 @@ const App = () => {
     <Router>
       <div>
         {user && <Navbar user={user} onLogout={handleLogout} />}
-        {user && <UserComponent userData={user} />}
+        {user && <UserComponent userData={user} setProfiles={setProfiles}/>}
         <Container>
           <Grid container spacing={3}>
             <Routes>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import backendIntegration from './BackendIntegration'; // Import the utility module
 
-const UserComponent = ({ userData }) => {
+const UserComponent = ({ userData ,  setProfiles}) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -23,6 +23,7 @@ const UserComponent = ({ userData }) => {
     try {
       const result = await backendIntegration.getData();
       setData(result); // Set the received data to state
+      setProfiles(result);
       return result;
     } catch (err) {
       setError(err.message); // Set error message to state
@@ -31,16 +32,16 @@ const UserComponent = ({ userData }) => {
     }
   };
 
-   useEffect(() => {
+  useEffect(() => {
     const performDataOperations = async () => {
       setLoading(true); // Ensure loading state is set before starting async operations
 
       try {
         const res = await fetchData();
-        
+
         if (res.length > 0) {
           const emailExists = res.some(item => item.email === userData.email);
-          
+
           if (!emailExists) {
             await storeData();
           }

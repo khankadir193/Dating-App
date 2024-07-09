@@ -12,7 +12,7 @@ const ProfileCard = ({ profile,onAction }) => {
       <CardMedia
         component="img"
         height="140"
-        image={profile.image}
+        image={profile.picture}
         alt={profile.name}
       />
       <CardContent>
